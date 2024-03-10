@@ -5,7 +5,6 @@ import Link from "next/link";
 const ProductCard: React.FC<Product> = ({
     id,
     name,
-    description,
     price,
     image_url,
 }) => {

@@ -2,7 +2,7 @@ export interface Product {
   id: number;
   name: string;
   description: string;
-  price: string;
+  price: number;
   image_url: string;
 }
 interface ProductState {
@@ -15,3 +15,8 @@ export const initialState: ProductState = {
   currentProduct: null,
 };
 
+export interface ProductEdit{
+  name: string;
+  price: number;
+  description: string;
+}

@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import ProductDetail from "../../components/ProductDetail";
 
-const ProductDetailsPage = () => {
-  const dispatch = useDispatch();
+const ProductPage: React.FC = () => {
+  return (
+    <div>
+      <ProductDetail />
+    </div>
+  );
+};
 
-
-
-  return <div>Hay producto</div>
-}
-
-
-
-export default ProductDetailsPage;
+export default ProductPage;
