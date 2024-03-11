@@ -17,4 +17,3 @@ usamos axios para realizar las peticions, este lo configuramos en la siguiente r
 ## podes crearte un usuario
 
 dandole click al boton de login accedes al formulario de login con un boton para registrarse, esta simple esteticamente, el password tiene que tener almenos 6 caracteres, al crearlo se te habilita un menu, convertite en admin para ver todas las funciones
-usamos axios para realizar las peticions, este lo configuramos en la siguiente ruta `./redux/axios.config.ts`
