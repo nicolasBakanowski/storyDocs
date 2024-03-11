@@ -22,7 +22,8 @@ export const loginAction =
 export const registerAction =
     (userData: User) => async (dispatch: Dispatch) => {
         try {
-            const response = await axios.post("/user/register", userData);
+            const response = await axios.post("/user/new", userData);
+            console.log(response.data, "asi viene la data")
             return true;
         } catch (error) {
             return false;

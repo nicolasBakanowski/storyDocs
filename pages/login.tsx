@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LoginData } from "@/interfaces/User";
 import { useRouter } from "next/router";
+import RegisterModal from "../components/registerModal";
+
 const Login: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
+    const [registerModalOpen, setRegisterModalOpen] = useState(false);
 
     const [formData, setFormData] = useState({
         username: "",
@@ -25,6 +28,14 @@ const Login: React.FC = () => {
             ...formData
         }
         dispatch(loginAction(LoginData) as any);
+    };
+
+    const openRegisterModal = () => {
+        setRegisterModalOpen(true);
+    };
+
+    const closeRegisterModal = () => {
+        setRegisterModalOpen(false);
     };
 
     return (
@@ -65,8 +76,19 @@ const Login: React.FC = () => {
                         Iniciar sesión
                     </button>
                 </form>
+                <button
+                    onClick={openRegisterModal}
+                    className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-4"
+                >
+                    Registrarse
+                </button>
             </div>
+            <RegisterModal
+                isOpen={registerModalOpen}
+                onClose={closeRegisterModal}
+            />
         </div>
+
     );
 };
 
