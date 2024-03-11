@@ -31,6 +31,7 @@ const HomePage: React.FC = () => {
             description={product.description}
             price={product.price}
             image_url={product.image_url}
+            id_brand={1}
           />
         ))}
       </section>
