@@ -13,9 +13,15 @@ const userSlice = createSlice({
     ) => {
       state.username = action.payload.username;
       state.token = action.payload.token;
+      state.isAdmin = action.payload.isAdmin
     },
+    logout: (state) => {
+        state.username = null;
+        state.token = null;
+        state.isAdmin = false
+      },
   },
 });
 
-export const { setUserInfoAndToken, } = userSlice.actions;
+export const { setUserInfoAndToken,logout } = userSlice.actions;
 export default userSlice.reducer;

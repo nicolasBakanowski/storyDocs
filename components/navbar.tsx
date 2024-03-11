@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import {
   MdClose,
   MdWork,
   MdMenu,
+  MdExitToApp,
 } from "react-icons/md";
-
+import { RootState } from "@/redux/store";
+import { logout } from "../redux/slices/userSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,10 +23,10 @@ const Navbar = () => {
   const openMenu = () => {
     setMenuOpen(true);
   };
+  const { isAdmin, username } = useSelector((state: RootState) => state.user);
 
   return (
     <nav className="bg-gray-900 text-white py-4 px-6 flex justify-between items-center relative">
-      {/* Fondo oscuro */}
       {menuOpen && (
         <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
       )}
@@ -45,7 +46,7 @@ const Navbar = () => {
         <Link href="/">StoryDocs</Link>
       </div>
       <div className="flex items-center space-x-5">
-        {true ? (
+        {isAdmin ? (
           <div className="relative inline-block text-left z-50">
             <button
               className="text-white focus:outline-none"
@@ -55,22 +56,19 @@ const Navbar = () => {
                 <MdMenu size={40} className="pt-2" />
               </div>
             </button>
-            {/* Menú lateral */}
             <div
               className={`${menuOpen ? "translate-x-0" : "translate-x-full"
                 } fixed top-0 right-0 h-full w-64 bg-white shadow-lg p-4 transform transition-transform ease-in-out duration-300 z-50`}
             >
-              {/* Botón de cierre */}
               <div className="flex items-center pb-6">
-                <span className="text-gray-950">{"nombre"}</span>
+                <span className="text-gray-950">{username}</span>
                 <button className="text-gray-700 pl-10" onClick={toggleMenu}>
                   <MdClose size={24} />
                 </button>
               </div>
 
-              {/* Opciones del menú */}
               <ul>
-                {true && (
+                {isAdmin && (
                   <li className="mb-2  py-2 border-t border-gray-300 my-5">
                     <button
                       className="flex items-center space-x-2 text-gray-700 hover:bg-gray-100 py-2 rounded-lg"
@@ -84,7 +82,17 @@ const Navbar = () => {
                     </button>
                   </li>
                 )}
-
+                <li>
+                  <button
+                    className="flex items-center space-x-2 text-red-600 hover:bg-gray-100 py-2 px-3 rounded-lg"
+                    onClick={() => {
+                      dispatch(logout());
+                    }}
+                  >
+                    <MdExitToApp size={20} />
+                    <span>Cerrar Sesión</span>
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
