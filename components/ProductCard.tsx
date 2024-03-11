@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "../interfaces/Products"
+import { Product } from "../interfaces/Products";
 import Link from "next/link";
 
 const ProductCard: React.FC<Product> = ({
@@ -7,6 +7,7 @@ const ProductCard: React.FC<Product> = ({
     name,
     price,
     image_url,
+    brand,
 }) => {
     return (
         <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
@@ -17,7 +18,16 @@ const ProductCard: React.FC<Product> = ({
                     className="h-80 w-72 object-cover rounded-t-xl"
                 />
                 <div className="px-4 py-3 w-72">
-                    <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                    <div className="flex items-center mb-2">
+                        <img
+                            src={brand.logo_url}
+                            alt={brand.name}
+                            className="h-8 w-8 object-cover rounded-full mr-2"
+                        />
+                        <span className="text-gray-400 uppercase text-xs">
+                            {brand.name}
+                        </span>
+                    </div>
                     <p className="text-lg font-bold text-black truncate block capitalize">
                         {name}
                     </p>

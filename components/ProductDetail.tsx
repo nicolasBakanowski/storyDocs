@@ -62,7 +62,18 @@ const ProductDetail: React.FC = () => {
                         className="w-full h-auto rounded-lg"
                     />
                 </div>
-                <p className="text-gray-700 mb-2">Descripción: {product.description}</p>
+                <p className="text-gray-700 mb-2">{product.description}</p>
+                {product.brand && (
+                    <>
+                        <p className="text-gray-700 mb-2"> {product.brand.name}</p>
+                        <img
+                            src={product.brand.logo_url}
+                            alt={product.brand.name}
+                            className="w-16 h-auto rounded-lg mb-4"
+                        />
+                    </>
+                )}
+
                 <p className="text-gray-700 mb-4">Precio: ${parseInt(product.price.toString(), 10)}</p>
                 <div className="flex space-x-4">
                     {isAdmin && (
