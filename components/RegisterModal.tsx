@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { registerAction } from "@/redux/actions/userAction";
-import { User } from "@/interfaces/User";
 
 interface RegisterModalProps {
     isOpen: boolean;

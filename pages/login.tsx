@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LoginData } from "@/interfaces/User";
 import { useRouter } from "next/router";
-import RegisterModal from "../components/registerModal";
+import RegisterModal from "../components/RegisterModal";
 
 const Login: React.FC = () => {
     const dispatch = useDispatch();
