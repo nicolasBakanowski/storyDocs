@@ -12,4 +12,4 @@ desarrolado con la version 20.11
 
 ## datos a tener en cuenta
 
-usamos axios para realizar las peticions, este lo configuramos en la siguiente ruta `src/redux/axios.config.ts`
+usamos axios para realizar las peticions, este lo configuramos en la siguiente ruta `./redux/axios.config.ts`
