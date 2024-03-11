@@ -43,7 +43,11 @@ const ProductDetail: React.FC = () => {
     }
 
     const handleDelete = () => {
-        router.push("/");
+        const shouldDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
+        if (shouldDelete) {
+            router.push("/");
+
+        }
     };
 
     return (

@@ -7,7 +7,6 @@ export const getAllProducts =
   () => async (dispatch: Dispatch) => {
     try {
       const response = await axios.get(`product/all`);
-      console.log("estos son los productos", response.data)
       dispatch(setProducts(response.data));
     } catch (error) {
       console.error("Error fetching products by category:", error);
@@ -51,7 +50,16 @@ export const editProduct =
       const response = await axios.put(`/product/edit/${idProduct}`, productData, config);
       return true;
     } catch (error) {
-      console.log("ESTE ES EL ERROR LA PUTA", error)
+      console.error("error al editar el producto", error)
     }
   };
+export const deleteProduct = async (idProduct: number) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const response = await axios.put(`/product/delete/${idProduct}`, config);
+
+}
 
