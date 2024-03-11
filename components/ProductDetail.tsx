@@ -13,6 +13,7 @@ const ProductDetail: React.FC = () => {
     const products = useSelector((state: RootState) => state.product.products);
     const product = products.find((p) => p.id === Number(productId));
     const token = useSelector((state: RootState) => state.user.token);
+    const isAdmin = useSelector((state: RootState) => state.user.isAdmin);
 
     const [isEditModalOpen, setEditModalOpen] = useState(false);
 
@@ -64,18 +65,22 @@ const ProductDetail: React.FC = () => {
                 <p className="text-gray-700 mb-2">Descripción: {product.description}</p>
                 <p className="text-gray-700 mb-4">Precio: ${parseInt(product.price.toString(), 10)}</p>
                 <div className="flex space-x-4">
-                    <button
-                        onClick={handleEdit}
-                        className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-                    >
-                        Editar
-                    </button>
-                    <button
-                        onClick={handleDelete}
-                        className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-red"
-                    >
-                        Eliminar
-                    </button>
+                    {isAdmin && (
+                        <>
+                            <button
+                                onClick={handleEdit}
+                                className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
+                            >
+                                Editar
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-red"
+                            >
+                                Eliminar
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
 

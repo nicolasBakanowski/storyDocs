@@ -10,6 +10,7 @@ import {
 } from "react-icons/md";
 import { RootState } from "@/redux/store";
 import { logout } from "../redux/slices/userSlice";
+import { changeToAdmin } from "@/redux/actions/userAction";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
   const openMenu = () => {
     setMenuOpen(true);
   };
-  const { isAdmin, username } = useSelector((state: RootState) => state.user);
+  const { isAdmin, username, token } = useSelector((state: RootState) => state.user);
 
   return (
     <nav className="bg-gray-900 text-white py-4 px-6 flex justify-between items-center relative">
@@ -46,7 +47,7 @@ const Navbar = () => {
         <Link href="/">StoryDocs</Link>
       </div>
       <div className="flex items-center space-x-5">
-        {isAdmin ? (
+        {username ? (
           <div className="relative inline-block text-left z-50">
             <button
               className="text-white focus:outline-none"
@@ -91,6 +92,17 @@ const Navbar = () => {
                   >
                     <MdExitToApp size={20} />
                     <span>Cerrar Sesión</span>
+                  </button>
+                  <button
+                    key={`${username}-${token}`}
+                    className="flex items-center space-x-2 text-green-600 hover:bg-gray-100 py-2 px-3 rounded-lg"
+                    onClick={() => {
+                      username && token &&
+                        dispatch(changeToAdmin(username, token) as any);
+                    }}
+                  >
+                    <MdExitToApp size={20} />
+                    <span>cambiar a admin</span>
                   </button>
                 </li>
               </ul>

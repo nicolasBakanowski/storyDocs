@@ -20,8 +20,11 @@ const userSlice = createSlice({
         state.token = null;
         state.isAdmin = false
       },
+    changeToAdminSlice: (state) => {
+        state.isAdmin = true;
+      },
   },
 });
 
-export const { setUserInfoAndToken,logout } = userSlice.actions;
+export const { setUserInfoAndToken,logout,changeToAdminSlice } = userSlice.actions;
 export default userSlice.reducer;
