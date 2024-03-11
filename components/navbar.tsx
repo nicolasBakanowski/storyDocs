@@ -44,7 +44,7 @@ const Navbar = () => {
         </button>
       )}
       <div className="text-2xl font-bold flex w-1/3 justify-center">
-        <Link href="/">StoryDocs</Link>
+        <Link href="/">StoryDots</Link>
       </div>
       <div className="flex items-center space-x-5">
         {username ? (
