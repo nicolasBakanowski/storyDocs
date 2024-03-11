@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import axios from "../axios.config";
-import { setCurrentProduct, setProducts } from "../slices/productSlice";
-import { ProductEdit } from "@/interfaces/Products";
+import { deleteProductFromState, setCurrentProduct, setProducts } from "../slices/productSlice";
+import { ProductEdit, createProduct } from "@/interfaces/Products";
 
 export const getAllProducts =
   () => async (dispatch: Dispatch) => {
@@ -17,19 +17,19 @@ export const getProductById =
   (id: Number) => async (dispatch: Dispatch) => {
     try {
       const response = await axios.get(`product/${id}`);
-      setCurrentProduct(response.data)
+      dispatch(setCurrentProduct(response.data))
     } catch (error) {
       console.error("Error fetching products by category:", error);
     }
   };
 
 export const addProduct =
-  (productData: FormData, token: string) => async (dispatch: Dispatch) => {
+  (productData: createProduct, token: string) => async (dispatch: Dispatch) => {
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'application/json',
         },
       };
       const response = await axios.post("/product/new", productData, config);
@@ -39,11 +39,12 @@ export const addProduct =
   };
 
 export const editProduct =
-  (idProduct: number, productData: ProductEdit) => async (dispatch: Dispatch) => {
+  (idProduct: number, productData: ProductEdit, token: string) => async (dispatch: Dispatch) => {
     try {
       productData.price = parseInt(productData.price.toString(), 10);
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       };
@@ -53,13 +54,20 @@ export const editProduct =
       console.error("error al editar el producto", error)
     }
   };
-export const deleteProduct = async (idProduct: number) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const response = await axios.put(`/product/delete/${idProduct}`, config);
-
-}
+export const deleteProduct = (idProduct: number, token: string) => async (dispatch: Dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await axios.delete(`/product/delete/${idProduct}`, config)
+    dispatch(deleteProductFromState(idProduct))
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw new Error('Error deleting product');
+  }
+};
 

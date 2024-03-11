@@ -4,7 +4,17 @@ export interface Product {
   description: string;
   price: number;
   image_url: string;
+  id_brand:number;
 }
+export interface createProduct{
+  name: string;
+  description: string;
+  price: number;
+  image_url: string;
+  id_brand:number;
+
+}
+
 interface ProductState {
   products: Product[];
   currentProduct: Product | null;

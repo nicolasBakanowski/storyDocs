@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import EditProductModal from "./editProductModal";
-import { editProduct } from "@/redux/actions/productAction";
+import { deleteProduct, editProduct } from "@/redux/actions/productAction";
 import { ProductEdit } from "@/interfaces/Products";
 
 const ProductDetail: React.FC = () => {
@@ -12,6 +12,7 @@ const ProductDetail: React.FC = () => {
     const { productId } = router.query;
     const products = useSelector((state: RootState) => state.product.products);
     const product = products.find((p) => p.id === Number(productId));
+    const token = useSelector((state: RootState) => state.user.token);
 
     const [isEditModalOpen, setEditModalOpen] = useState(false);
 
@@ -27,9 +28,9 @@ const ProductDetail: React.FC = () => {
         openEditModal();
     };
 
-    const handleEditSubmit = (data: ProductEdit) => {
-        if (product?.id !== undefined) {
-            dispatch(editProduct(product.id, data) as any);
+    const handleEditSubmit = async (data: ProductEdit) => {
+        if (product?.id !== undefined && token) {
+            dispatch(editProduct(product.id, data, token) as any);
             closeEditModal();
         } else {
             console.error('ID de producto indefinido');
@@ -42,11 +43,10 @@ const ProductDetail: React.FC = () => {
         return <p>Producto no encontrado</p>;
     }
 
-    const handleDelete = () => {
-        const shouldDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
-        if (shouldDelete) {
+    const handleDelete = async () => {
+        if (token) {
+            dispatch(deleteProduct(product.id, token) as any)
             router.push("/");
-
         }
     };
 
