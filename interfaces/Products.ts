@@ -12,6 +12,7 @@ export interface Product {
   description: string;
   price: number;
   image_url: string;
+  id_brand:number
   brand: Brand;
 }
 
@@ -20,7 +21,7 @@ export interface createProduct{
   description: string;
   price: number;
   image_url: string;
-  id_brand:number;
+  id_brand: number;
 
 }
 

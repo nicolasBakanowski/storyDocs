@@ -9,7 +9,7 @@ export const getAllProducts =
       const response = await axios.get(`product/all`);
       dispatch(setProducts(response.data));
     } catch (error) {
-      console.error("Error fetching products by category:", error);
+      console.error("Error fetching products", error);
     }
   };
 
@@ -19,7 +19,7 @@ export const getProductById =
       const response = await axios.get(`product/${id}`);
       dispatch(setCurrentProduct(response.data))
     } catch (error) {
-      console.error("Error fetching products by category:", error);
+      console.error("Error fetching products", error);
     }
   };
 
