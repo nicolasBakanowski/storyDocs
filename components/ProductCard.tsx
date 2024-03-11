@@ -18,16 +18,20 @@ const ProductCard: React.FC<Product> = ({
                     className="h-80 w-72 object-cover rounded-t-xl"
                 />
                 <div className="px-4 py-3 w-72">
-                    <div className="flex items-center mb-2">
-                        <img
-                            src={brand.logo_url}
-                            alt={brand.name}
-                            className="h-8 w-8 object-cover rounded-full mr-2"
-                        />
-                        <span className="text-gray-400 uppercase text-xs">
-                            {brand.name}
-                        </span>
-                    </div>
+                    {brand ? (
+                        <div className="flex items-center mb-2">
+                            <img
+                                src={brand.logo_url}
+                                alt={brand.name}
+                                className="h-8 w-8 object-cover rounded-full mr-2"
+                            />
+                            <span className="text-gray-400 uppercase text-xs">
+                                {brand.name}
+                            </span>
+                        </div>
+                    ) : (
+                        <p className="text-gray-400 uppercase text-xs">Brand not available</p>
+                    )}
                     <p className="text-lg font-bold text-black truncate block capitalize">
                         {name}
                     </p>
